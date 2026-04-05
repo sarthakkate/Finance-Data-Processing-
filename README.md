@@ -2,26 +2,34 @@
 
 A production-ready Node.js backend application for managing financial records with role-based access control (RBAC), JWT authentication, and advanced analytics using MongoDB aggregation pipelines.
 
-## Features
+## 👤 Developer Information
+- **Name:** Sarthak Sanjay Kate
+- **Email:** katesarthak26@gmail.com
+- **Role:** Full Stack Developer (AI & Data Science Specialization)
 
-- **User Authentication**: JWT-based authentication system
+---
+
+## 🚀 Features
+
+- **User Authentication**: Secure JWT-based authentication system.
 - **Role-Based Access Control (RBAC)**:
-  - **Admin**: Full CRUD access to all records
-  - **Analyst**: Can create and view records, access analytics
-  - **Viewer**: Read-only access to own records
-- **Financial Record Management**: Track income and expenses with categorization
-- **Dashboard Analytics**: MongoDB aggregation for summary statistics
-- **Advanced Filtering**: Filter records by date range, category, and type
-- **Input Validation**: Comprehensive validation using express-validator
-- **Error Handling**: Global error handling middleware
-- **Security**: Helmet, CORS, bcryptjs password hashing
+  - **Admin**: Full CRUD access to all records and system-wide statistics.
+  - **Analyst**: Can create/view records and access detailed financial analytics.
+  - **Viewer**: Read-only access to their own transaction history.
+- **Financial Record Management**: Track income and expenses with detailed categorization.
+- **Dashboard Analytics**: High-performance MongoDB aggregation for summary statistics.
+- **Advanced Filtering**: Filter records by date range, category, and transaction type.
+- **Input Validation**: Comprehensive validation using `express-validator`.
+- **Security**: Implementation of Helmet, CORS, and `bcryptjs` password hashing.
 
-## Project Structure
+---
 
-```
+## 📁 Project Structure
+
+```text
 FinanceDataProcessing/
 ├── models/
-│   ├── User.js                # User schema with authentication
+│   ├── User.js                # User schema with authentication logic
 │   └── Record.js              # Financial record schema with indexing
 ├── controllers/
 │   ├── authController.js      # Registration, login, profile management
@@ -37,13 +45,12 @@ FinanceDataProcessing/
 │   └── validation.js          # Input validation for all endpoints
 ├── config/
 │   └── database.js            # MongoDB connection management
-├── server.js                  # Main Express application
-├── package.json               # Dependencies
-├── README.md                  # Full documentation
-├── QUICKSTART.md              # Quick setup guide
-├── postman-collection.json    # Postman import file
-└── api-examples.sh            # Curl command examples
-```
+├── server.js                  # Main Express application entry point
+├── package.json               # Project dependencies and scripts
+├── README.md                  # Project documentation
+├── QUICKSTART.md              # Setup guide for evaluators
+├── postman-collection.json    # Ready-to-import Postman file
+└── api-examples.sh            # Shell script with cURL examples
 
 ## Installation
 
@@ -89,363 +96,84 @@ FinanceDataProcessing/
    npm start
    ```
 
-## API Documentation
+Markdown# Finance Data Processing and Access Control Backend
 
-### Authentication Endpoints
+A production-ready Node.js backend application for managing financial records with role-based access control (RBAC), JWT authentication, and advanced analytics using MongoDB aggregation pipelines.
 
-#### Register User
-```http
-POST /api/auth/register
-Content-Type: application/json
+## 👤 Developer Information
+- **Name:** Sarthak Sanjay Kate
+- **Email:** katesarthak26@gmail.com
+- **Role:** Full Stack Developer (AI & Data Science Specialization)
 
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "password123",
-  "role": "Analyst"
-}
-```
+---
 
-**Response:**
-```json
-{
-  "success": true,
-  "message": "User registered successfully",
-  "token": "eyJhbGc...",
-  "user": {
-    "_id": "...",
-    "name": "John Doe",
-    "email": "john@example.com",
-    "role": "Analyst",
-    "status": "Active"
-  }
-}
-```
+## 🚀 Features
 
-#### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
+- **User Authentication**: Secure JWT-based authentication system.
+- **Role-Based Access Control (RBAC)**:
+  - **Admin**: Full CRUD access to all records and system-wide statistics.
+  - **Analyst**: Can create/view records and access detailed financial analytics.
+  - **Viewer**: Read-only access to their own transaction history.
+- **Financial Record Management**: Track income and expenses with detailed categorization.
+- **Dashboard Analytics**: High-performance MongoDB aggregation for summary statistics.
+- **Advanced Filtering**: Filter records by date range, category, and transaction type.
+- **Input Validation**: Comprehensive validation using `express-validator`.
+- **Security**: Implementation of Helmet, CORS, and `bcryptjs` password hashing.
 
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
+---
 
-#### Get User Profile
-```http
-GET /api/auth/profile
-Authorization: Bearer <token>
-```
+## 📁 Project Structure
 
-#### Update Profile
-```http
-PUT /api/auth/profile
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "name": "Jane Doe",
-  "email": "jane@example.com"
-}
-```
-
-### Record Endpoints
-
-#### Get All Records (with filtering)
-```http
-GET /api/records?page=1&limit=10&startDate=2024-01-01&endDate=2024-12-31&category=Food&type=Expense
-Authorization: Bearer <token>
-```
-
-**Query Parameters:**
-- `page`: Page number (default: 1)
-- `limit`: Records per page (default: 10, max: 100)
-- `startDate`: ISO 8601 date format
-- `endDate`: ISO 8601 date format
-- `category`: Category name
-- `type`: 'Income' or 'Expense'
-
-#### Get Single Record
-```http
-GET /api/records/:id
-Authorization: Bearer <token>
-```
-
-#### Create Record (Analyst/Admin only)
-```http
-POST /api/records
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "amount": 150.50,
-  "type": "Expense",
-  "category": "Food",
-  "date": "2024-01-15T00:00:00Z",
-  "description": "Grocery shopping"
-}
-```
-
-#### Update Record (Analyst/Admin only)
-```http
-PUT /api/records/:id
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "amount": 200.00,
-  "category": "Transport"
-}
-```
-
-#### Delete Record (Admin only)
-```http
-DELETE /api/records/:id
-Authorization: Bearer <token>
-```
-
-### Summary/Analytics Endpoints
-
-#### Get Dashboard Summary (Analyst/Admin only)
-```http
-GET /api/summary?startDate=2024-01-01&endDate=2024-12-31
-Authorization: Bearer <token>
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "summary": {
-    "totalIncome": 5000,
-    "totalExpense": 3000,
-    "netBalance": 2000,
-    "incomeCount": 5,
-    "expenseCount": 15,
-    "periodStart": "2024-01-01",
-    "periodEnd": "2024-12-31"
-  },
-  "categoryBreakdown": [
-    {
-      "_id": "Food",
-      "total": 800,
-      "count": 10,
-      "type": "Expense"
-    },
-    ...
-  ],
-  "recentTransactions": [...]
-}
-```
-
-#### Get Advanced Analytics (Analyst/Admin only)
-```http
-GET /api/summary/advanced?startDate=2024-01-01&endDate=2024-12-31
-Authorization: Bearer <token>
-```
-
-#### Get Admin Summary (Admin only)
-```http
-GET /api/summary/admin
-Authorization: Bearer <token>
-```
-
-**Response includes:**
-- Total records in system
-- Total income/expense across all users
-- Top 5 users by expense
-- Most active categories
-
-## Role-Based Access Control
-
-| Endpoint | Viewer | Analyst | Admin |
-|----------|--------|---------|-------|
-| `/api/records` (GET) | Own only | Own only | All |
-| `/api/records/:id` (GET) | Own only | Own only | All |
-| `/api/records` (POST) | ✗ | ✓ | ✓ |
-| `/api/records/:id` (PUT) | ✗ | Own only | All |
-| `/api/records/:id` (DELETE) | ✗ | ✗ | ✓ |
-| `/api/summary` (GET) | ✗ | ✓ | ✓ |
-| `/api/summary/advanced` (GET) | ✗ | ✓ | ✓ |
-| `/api/summary/admin` (GET) | ✗ | ✗ | ✓ |
-
-## Categories
-
-**Income Categories:**
-- Salary
-- Bonus
-- Investment
-- Other Income
-
-**Expense Categories:**
-- Food
-- Transport
-- Utilities
-- Entertainment
-- Healthcare
-- Education
-- Other Expense
-
-## Error Handling
-
-All errors are returned in a consistent format:
-
-```json
-{
-  "success": false,
-  "message": "Error description",
-  "errors": [
-    {
-      "field": "email",
-      "message": "Please provide a valid email"
-    }
-  ]
-}
-```
-
-## Authentication
-
-All protected endpoints require a Bearer token in the Authorization header:
-
-```http
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
-
-## Environment Variables
-
-```env
-# Server
-PORT=5000
+```text
+FinanceDataProcessing/
+├── models/
+│   ├── User.js                # User schema with authentication logic
+│   └── Record.js              # Financial record schema with indexing
+├── controllers/
+│   ├── authController.js      # Registration, login, profile management
+│   ├── recordController.js    # CRUD operations for records with filtering
+│   └── summaryController.js   # Dashboard analytics with aggregation
+├── routes/
+│   ├── authRoutes.js          # Authentication endpoints
+│   ├── recordRoutes.js        # Record management endpoints
+│   └── summaryRoutes.js       # Summary & analytics endpoints
+├── middleware/
+│   ├── auth.js                # JWT authentication & RBAC middleware
+│   ├── errorHandler.js        # Global error handling
+│   └── validation.js          # Input validation for all endpoints
+├── config/
+│   └── database.js            # MongoDB connection management
+├── server.js                  # Main Express application entry point
+├── package.json               # Project dependencies and scripts
+├── README.md                  # Project documentation
+├── QUICKSTART.md              # Setup guide for evaluators
+├── postman-collection.json    # Ready-to-import Postman file
+└── api-examples.sh            # Shell script with cURL examples
+🛠️ Installation & SetupPrerequisitesNode.js (v14+)MongoDB (Local instance or Atlas)npmStepsNavigate to the project directoryBashcd FinanceDataProcessing
+Install dependenciesBashnpm install
+Configure environment variablesCreate a .env file in the root directory:Code snippetPORT=5000
 NODE_ENV=development
-
-# Database
-MONGODB_URI=mongodb://localhost:27017/finance_db
-
-# JWT
-JWT_SECRET=your_super_secret_jwt_key_change_in_production
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_random_secret
 JWT_EXPIRE=7d
+Start the serverBash# Development (with nodemon)
+npm run dev
 
-# API
-API_BASE_URL=http://localhost:5000
-```
-
-## Testing with cURL
-
-### Register
-```bash
-curl -X POST http://localhost:5000/api/auth/register \
+# Production
+npm start
+📚 API Endpoints SummaryAuthenticationMethodEndpointAccessPOST/api/auth/registerPublicPOST/api/auth/loginPublicGET/api/auth/profileProtectedRecords (CRUD)MethodEndpointPermissionGET/api/recordsViewer+ (Own only)POST/api/recordsAnalyst+PUT/api/records/:idAnalyst+ (Own) / Admin (All)DELETE/api/records/:idAdmin OnlyAnalyticsMethodEndpointPermissionGET/api/summaryAnalyst+GET/api/summary/adminAdmin Only🧪 Testing with cURL1. Register Sarthak Kate (Admin)Bashcurl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
+    "name": "Sarthak Kate",
+    "email": "katesarthak26@gmail.com",
     "password": "password123",
-    "role": "Analyst"
+    "role": "Admin"
   }'
-```
-
-### Login
-```bash
-curl -X POST http://localhost:5000/api/auth/login \
+2. LoginBashcurl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "john@example.com",
+    "email": "katesarthak26@gmail.com",
     "password": "password123"
   }'
-```
-
-### Create Record (replace TOKEN)
-```bash
-curl -X POST http://localhost:5000/api/records \
-  -H "Authorization: Bearer TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "amount": 150.50,
-    "type": "Expense",
-    "category": "Food",
-    "description": "Lunch"
-  }'
-```
-
-### Get Summary
-```bash
-curl -X GET "http://localhost:5000/api/summary?startDate=2024-01-01&endDate=2024-12-31" \
-  -H "Authorization: Bearer TOKEN"
-```
-
-## Database Schema
-
-### User Schema
-```javascript
-{
-  name: String (required, 2-50 chars),
-  email: String (required, unique, email format),
-  password: String (required, hashed, 6+ chars),
-  role: String (enum: 'Admin', 'Analyst', 'Viewer'),
-  status: String (enum: 'Active', 'Inactive'),
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### Record Schema
-```javascript
-{
-  amount: Number (required, >= 0),
-  type: String (required, enum: 'Income', 'Expense'),
-  category: String (required, from predefined list),
-  date: Date (default: now),
-  description: String (optional, max 500 chars),
-  userId: ObjectId (required, ref to User),
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-## Best Practices Implemented
-
-✓ **Security:**
-- Password hashing with bcryptjs
-- JWT token-based authentication
-- Helmet for security headers
-- CORS enabled
-- Input validation
-
-✓ **Database:**
-- Indexed fields for performance (userId, category, type, date)
-- Proper schema validation
-- Automatic timestamps
-
-✓ **Code Quality:**
-- Modular folder structure
-- Separation of concerns
-- Comprehensive error handling
-- Input validation middleware
-- Consistent response format
-
-✓ **Scalability:**
-- Pagination support
-- Efficient aggregation queries
-- Indexed database queries
-- Connection pooling
-
-## Future Enhancements
-
-- Rate limiting middleware
-- Caching layer (Redis)
-- Audit logging
-- Export data (CSV/PDF)
-- Budget management and alerts
-- Recurring transactions
-- Multi-currency support
-- Two-factor authentication
-- Email notifications
-
-## License
-
-MIT
-
-## Support
-
-For issues or questions, please refer to the code comments and API documentation.
+🔒 Security Best Practices ImplementedPassword Hashing: Passwords are never stored in plain text; bcryptjs is used with a salt factor of 10.JWT Security: Tokens are issued with an expiration and required for all sensitive routes.NoSQL Injection Prevention: Mongoose schemas and strict validation prevent malicious query injections.Error Privacy: Global error handlers ensure that sensitive stack traces are not leaked to the client in production.📝 LicenseThis project is licensed under the MIT License.
+📞 ContactFor any queries regarding this implementation, please reach out to Sarthak Sanjay Kate at katesarthak26@gmail.com.
