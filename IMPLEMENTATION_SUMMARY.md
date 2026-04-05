@@ -170,8 +170,8 @@ npm start    # Production
 curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
+    "name": "sarthak kate",
+    "email": "katesarthak26@gmail.com",
     "password": "password123",
     "role": "Analyst"
   }'
@@ -179,7 +179,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 # Login
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email": "john@example.com", "password": "password123"}'
+  -d '{"email": "katesarthak26@gmail.com", "password": "password123"}'
 
 # Create Record (use token from login response)
 curl -X POST http://localhost:5000/api/records \
