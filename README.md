@@ -19,27 +19,30 @@ A production-ready Node.js backend application for managing financial records wi
 ## Project Structure
 
 ```
-zonsor/
-├── models/                 # Mongoose schemas
-│   ├── User.js            # User model with authentication
-│   └── Record.js          # Financial record model
-├── controllers/           # Business logic
-│   ├── authController.js  # Auth operations
-│   ├── recordController.js # Record CRUD operations
-│   └── summaryController.js # Analytics and summary
-├── routes/                # API endpoints
-│   ├── authRoutes.js      # Auth endpoints
-│   ├── recordRoutes.js    # Record endpoints
-│   └── summaryRoutes.js   # Summary endpoints
-├── middleware/            # Express middleware
-│   ├── auth.js           # JWT authentication & RBAC
-│   ├── errorHandler.js   # Error handling
-│   └── validation.js     # Input validation
-├── config/               # Configuration files
-│   └── database.js       # MongoDB connection
-├── server.js             # Main server file
-├── package.json          # Dependencies
-└── .env                  # Environment variables
+FinanceDataProcessing/
+├── models/
+│   ├── User.js                # User schema with authentication
+│   └── Record.js              # Financial record schema with indexing
+├── controllers/
+│   ├── authController.js      # Registration, login, profile management
+│   ├── recordController.js    # CRUD operations for records with filtering
+│   └── summaryController.js   # Dashboard analytics with aggregation
+├── routes/
+│   ├── authRoutes.js          # Authentication endpoints
+│   ├── recordRoutes.js        # Record management endpoints
+│   └── summaryRoutes.js       # Summary & analytics endpoints
+├── middleware/
+│   ├── auth.js                # JWT authentication & RBAC middleware
+│   ├── errorHandler.js        # Global error handling
+│   └── validation.js          # Input validation for all endpoints
+├── config/
+│   └── database.js            # MongoDB connection management
+├── server.js                  # Main Express application
+├── package.json               # Dependencies
+├── README.md                  # Full documentation
+├── QUICKSTART.md              # Quick setup guide
+├── postman-collection.json    # Postman import file
+└── api-examples.sh            # Curl command examples
 ```
 
 ## Installation
