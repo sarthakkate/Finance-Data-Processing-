@@ -1,289 +1,226 @@
-
-
 {
-  "info": {
-    "name": "Finance Backend API",
-    "description": "Collection for testing Finance Data Processing Backend",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Auth",
-      "item": [
-        {
-          "name": "Register User",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"John Analyst\",\n  \"email\": \"analyst@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"Analyst\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/auth/register",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "register"]
-            }
-          }
-        },
-        {
-          "name": "Login",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"analyst@example.com\",\n  \"password\": \"password123\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "login"]
-            }
-          }
-        },
-        {
-          "name": "Get Profile",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/auth/profile",
-              "host": ["{{base_url}}"],
-              "path": ["api", "auth", "profile"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Records",
-      "item": [
-        {
-          "name": "Create Record",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"amount\": 150.50,\n  \"type\": \"Expense\",\n  \"category\": \"Food\",\n  \"date\": \"2024-01-15T00:00:00Z\",\n  \"description\": \"Grocery shopping\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/records",
-              "host": ["{{base_url}}"],
-              "path": ["api", "records"]
-            }
-          }
-        },
-        {
-          "name": "Get All Records",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/records?page=1&limit=10",
-              "host": ["{{base_url}}"],
-              "path": ["api", "records"],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                },
-                {
-                  "key": "startDate",
-                  "value": "2024-01-01",
-                  "disabled": true
-                },
-                {
-                  "key": "endDate",
-                  "value": "2024-12-31",
-                  "disabled": true
-                },
-                {
-                  "key": "category",
-                  "value": "Food",
-                  "disabled": true
-                },
-                {
-                  "key": "type",
-                  "value": "Expense",
-                  "disabled": true
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Single Record",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/records/:recordId",
-              "host": ["{{base_url}}"],
-              "path": ["api", "records", ":recordId"]
-            }
-          }
-        },
-        {
-          "name": "Update Record",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"amount\": 200.00,\n  \"category\": \"Transport\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/records/:recordId",
-              "host": ["{{base_url}}"],
-              "path": ["api", "records", ":recordId"]
-            }
-          }
-        },
-        {
-          "name": "Delete Record",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/records/:recordId",
-              "host": ["{{base_url}}"],
-              "path": ["api", "records", ":recordId"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Summary",
-      "item": [
-        {
-          "name": "Get Dashboard Summary",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/summary?startDate=2024-01-01&endDate=2024-12-31",
-              "host": ["{{base_url}}"],
-              "path": ["api", "summary"],
-              "query": [
-                {
-                  "key": "startDate",
-                  "value": "2024-01-01"
-                },
-                {
-                  "key": "endDate",
-                  "value": "2024-12-31"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Advanced Analytics",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/summary/advanced",
-              "host": ["{{base_url}}"],
-              "path": ["api", "summary", "advanced"]
-            }
-          }
-        },
-        {
-          "name": "Get Admin Summary",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/summary/admin",
-              "host": ["{{base_url}}"],
-              "path": ["api", "summary", "admin"]
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "http://localhost:5000",
-      "type": "string"
-    },
-    {
-      "key": "token",
-      "value": "",
-      "type": "string"
-    }
-  ]
+	"info": {
+		"name": "Finance Backend API - Final Submission",
+		"description": "Comprehensive Collection for testing Finance Data Processing Backend including RBAC and Analytics.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Register Admin User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sarthak Admin\",\n    \"email\": \"admin@test.com\",\n    \"password\": \"password123\",\n    \"role\": \"Admin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@test.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Financial Records",
+			"item": [
+				{
+					"name": "Create Record (Income)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000,\n    \"type\": \"Income\",\n    \"category\": \"Salary\",\n    \"description\": \"April Monthly Salary\",\n    \"date\": \"2026-04-05\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/records",
+							"host": ["{{base_url}}"],
+							"path": ["api", "records"]
+						}
+					}
+				},
+				{
+					"name": "Create Record (Expense)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1200,\n    \"type\": \"Expense\",\n    \"category\": \"Food\",\n    \"description\": \"Grocery Shopping\",\n    \"date\": \"2026-04-05\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/records",
+							"host": ["{{base_url}}"],
+							"path": ["api", "records"]
+						}
+					}
+				},
+				{
+					"name": "Get All Records (With Filters)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/records?type=Expense&category=Food",
+							"host": ["{{base_url}}"],
+							"path": ["api", "records"],
+							"query": [
+								{ "key": "type", "value": "Expense" },
+								{ "key": "category", "value": "Food" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Record",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1500,\n    \"description\": \"Updated grocery cost\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/records/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "records", ":id"],
+							"variable": [{ "key": "id", "value": "PASTE_RECORD_ID_HERE" }]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Dashboard & Analytics",
+			"item": [
+				{
+					"name": "Standard Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/summary",
+							"host": ["{{base_url}}"],
+							"path": ["api", "summary"]
+						}
+					}
+				},
+				{
+					"name": "Advanced Analytics (Aggregated)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/summary/advanced",
+							"host": ["{{base_url}}"],
+							"path": ["api", "summary", "advanced"]
+						}
+					}
+				},
+				{
+					"name": "Admin System-Wide Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/summary/admin",
+							"host": ["{{base_url}}"],
+							"path": ["api", "summary", "admin"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "PASTE_JWT_HERE",
+			"type": "string"
+		}
+	]
 }
